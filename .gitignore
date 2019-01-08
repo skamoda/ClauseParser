@@ -3,3 +3,6 @@
 ################################################################################
 
 /.vs/ClauseParser/v15
+/.vs/ClauseParser/DesignTimeBuild
+/ClauseParser/bin/Debug/netcoreapp2.1
+/ClauseParser/obj
