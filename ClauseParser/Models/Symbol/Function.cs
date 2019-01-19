@@ -2,6 +2,8 @@
 using ClauseParser.Models.Exceptions;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace ClauseParser.Models.Symbol
 {
@@ -75,6 +77,29 @@ namespace ClauseParser.Models.Symbol
             
             symbol.IndexInParent = index;
             symbol.Parent = this;
+        }
+
+        public override string Serialize()
+        {
+            var stringBuilder = new StringBuilder();
+            
+            stringBuilder.Append(Name);
+            stringBuilder.Append("(");
+
+            foreach (var argument in Arguments)
+            {
+                stringBuilder.Append($"{argument.Serialize()}");
+                if (Arguments.LastOrDefault() != argument)
+                {
+                    stringBuilder.Append(", ");
+                }
+            }
+
+            stringBuilder.Append(")");
+            
+
+
+            return stringBuilder.ToString();
         }
 
         public override List<Symbol> GetChildren() => new List<Symbol>(Arguments);
