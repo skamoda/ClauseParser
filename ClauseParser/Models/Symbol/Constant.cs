@@ -1,7 +1,5 @@
-﻿using System;
-using ClauseParser.Models.Exceptions;
+﻿using ClauseParser.Models.Exceptions;
 using System.Collections.Generic;
-using System.Text;
 
 namespace ClauseParser.Models.Symbol
 {
@@ -15,15 +13,6 @@ namespace ClauseParser.Models.Symbol
         }
         public override void SetChild(int index, Symbol symbol) => throw new InvalidChildIndexException("Index: " + index);
 
-        public virtual string Serialize()
-        {
-            var stringBuilder = new StringBuilder();
-
-            stringBuilder.Append(Name);
-
-
-            return stringBuilder.ToString();
-        }
         public override List<Symbol> GetChildren() => new List<Models.Symbol.Symbol>();
     }
 }

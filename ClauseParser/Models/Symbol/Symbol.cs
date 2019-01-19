@@ -2,7 +2,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Text;
 
 namespace ClauseParser.Models.Symbol
 {
@@ -77,13 +76,6 @@ namespace ClauseParser.Models.Symbol
         public override string ToString()
         {
             return GetType().Name + ": " + Name;
-        }
-
-        public virtual string Serialize()
-        {
-            var stringBuilder = new StringBuilder();
-
-            return stringBuilder.ToString();
         }
 
         public Symbol Clone()
