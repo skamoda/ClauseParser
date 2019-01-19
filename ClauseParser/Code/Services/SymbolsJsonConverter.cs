@@ -19,7 +19,7 @@ namespace ClauseParser.Code.Services
                 val = val.Replace(keyValuePair.Key, singleChar);
             }
 
-            writer.WriteValue(value.Serialize());
+            writer.WriteValue(val);
         }
 
         public override Symbol ReadJson(JsonReader reader, Type objectType, Symbol existingValue, bool hasExistingValue,

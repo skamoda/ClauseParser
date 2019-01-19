@@ -31,8 +31,8 @@ namespace ClauseParser.Controllers
                 //return error ie bad syntax
             }
 
-            var a = Newtonsoft.Json.JsonConvert.SerializeObject(steps[0].Top, new SymbolsJsonConverter());  //();
-            return Json(steps);
+            var json = JsonConvert.SerializeObject(steps, new SymbolsJsonConverter());
+            return Json(json);
         }
     }
 }
