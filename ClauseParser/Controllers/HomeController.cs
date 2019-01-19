@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using ClauseParser.Code.Services.Parser;
+using ClauseParser.Models;
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace ClauseParser.Controllers
 {
@@ -13,7 +17,18 @@ namespace ClauseParser.Controllers
         [HttpPost]
         public IActionResult Parse(string text)
         {
-            ViewBag.text = text;
+            ParserService parserService = new ParserService();
+
+            try
+            {
+                List<Step> steps = parserService.Parse(text);
+            }
+            catch (Exception ex)
+            {
+                //return error ie bad syntax
+            }
+
+            //ViewBag.stepList = steps;
 
             return View("Index");
         }

@@ -1,44 +1,26 @@
-﻿@{
-    ViewBag.Title = "Index";
-    ViewData["Title"] = "Home Page";
-}
-
-<div class="col-xs-6">
-    <div class="row">
-        <div id="button-panel" style="margin-left:10px;margin-right:10px">
+﻿<div class="content">
+        <div id="button-panel">
             <div class="col-xs-3">
-                <button type="button" class="btn btn-default btn-lg">∀</button>
+                <button type="button" class="btn btn-default btn-lg sign-button">∀</button>
+                <button type="button" class="btn btn-default btn-lg sign-button">∃</button>
             </div>
             <div class="col-xs-3">
-                <button type="button" class="btn btn-default btn-lg">∃</button>
+                <button type="button" class="btn btn-default btn-lg sign-button">∧</button>
+                <button type="button" class="btn btn-default btn-lg sign-button">∨</button>
             </div>
             <div class="col-xs-3">
-                <button type="button" class="btn btn-default btn-lg">∧</button>
+                <button type="button" class="btn btn-default btn-lg sign-button">⇒</button>
+                <button type="button" class="btn btn-default btn-lg sign-button">⇔</button>
             </div>
             <div class="col-xs-3">
-                <button type="button" class="btn btn-default btn-lg">∨</button>
-            </div>
-            <div class="col-xs-4">
-                <button type="button" class="btn btn-default btn-lg">⇒</button>
-            </div>
-            <div class="col-xs-4">
-                <button type="button" class="btn btn-default btn-lg">⇔</button>
-            </div>
-            <div class="col-xs-4">
-                <button type="button" class="btn btn-default btn-lg">¬</button>
+                <button type="button" class="btn btn-default btn-lg sign-button">¬</button>
+                <button type="button" class="btn btn-default btn-lg sign-button">¬¬</button>
             </div>
         </div>
-    </div>
-    <form action="/Parse" method="POST">
-        <div class="row">
             <div class="col-xs-12">
-                <input type="text" id="text" name="text" class="form-control input-lg" value="@ViewBag.text" />
+                <input type="text" id="step-submit-input" name="step-submit-input" class="form-control input-lg" value="@ViewBag.text" />
             </div>
-        </div>
-        <div class="row">
             <div class="col-xs-12">
-                <button class="btn btn-primary btn-lg col-xs-12">Parse</button>
+                <button class="btn btn-primary btn-lg col-xs-12" id="step-submit-button">Parse</button>
             </div>
-        </div>
-    </form>
 </div>
