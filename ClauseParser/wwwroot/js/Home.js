@@ -1,15 +1,33 @@
-﻿$('#step-submit-button').on('click', function () {
-    var data = $('#step-submit-input').val();
-    $.ajax({
-        method: "POST",
-        url: "Home/Parse",
-        data: { text: data },
-        dataType: "json"
-    })
-        .success(function () {
-            alert("Data Saved: ");
+﻿function StepViewModel(title, top) {
+    var self = this;
+    //Data
+    self.title = title;
+    self.top = top;
+}
+
+function StepListViewModel(dataRoute) {
+    var self = this;
+    //Data
+    self.steps = ko.observableArray([]);
+
+    //Operations
+    self.sendData = function () {
+        self.steps.removeAll();
+        $.ajax({
+            method: "POST",
+            url: dataRoute,
+            data: { text: $('#step-submit-input').val() },
+            dataType: "json",
+            success: (function (json) {
+                JSON.parse(json).forEach(function(element) {
+                    self.steps.push(new StepViewModel(element.Title, element.Top));
+                });
+            })
         });
-});
+
+    };
+}
+
 
 $('#button-panel').find('button').each(function () {
     $(this).click(function () {

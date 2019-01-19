@@ -8,6 +8,8 @@ namespace ClauseParser.Models
     {
         public Symbol.Symbol Top { get; set; }
 
+        public string Title { get; set; }
+
         public Step(List<Symbol.Symbol> postfixList)
         {
             Stack<Symbol.Symbol> symbolStack = new Stack<Symbol.Symbol>();
