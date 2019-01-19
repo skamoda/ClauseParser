@@ -1,26 +1,42 @@
 ﻿<div class="content">
-        <div id="button-panel">
-            <div class="col-xs-3">
-                <button type="button" class="btn btn-default btn-lg sign-button">∀</button>
-                <button type="button" class="btn btn-default btn-lg sign-button">∃</button>
-            </div>
-            <div class="col-xs-3">
-                <button type="button" class="btn btn-default btn-lg sign-button">∧</button>
-                <button type="button" class="btn btn-default btn-lg sign-button">∨</button>
-            </div>
-            <div class="col-xs-3">
-                <button type="button" class="btn btn-default btn-lg sign-button">⇒</button>
-                <button type="button" class="btn btn-default btn-lg sign-button">⇔</button>
-            </div>
-            <div class="col-xs-3">
-                <button type="button" class="btn btn-default btn-lg sign-button">¬</button>
-                <button type="button" class="btn btn-default btn-lg sign-button">¬¬</button>
-            </div>
+    <div id="button-panel">
+        <div class="col-xs-3">
+            <button type="button" class="btn btn-default btn-lg sign-button">∀</button>
+            <button type="button" class="btn btn-default btn-lg sign-button">∃</button>
         </div>
-            <div class="col-xs-12">
-                <input type="text" id="step-submit-input" name="step-submit-input" class="form-control input-lg" value="@ViewBag.text" />
-            </div>
-            <div class="col-xs-12">
-                <button class="btn btn-primary btn-lg col-xs-12" id="step-submit-button">Parse</button>
-            </div>
+        <div class="col-xs-3">
+            <button type="button" class="btn btn-default btn-lg sign-button">∧</button>
+            <button type="button" class="btn btn-default btn-lg sign-button">∨</button>
+        </div>
+        <div class="col-xs-3">
+            <button type="button" class="btn btn-default btn-lg sign-button">⇒</button>
+            <button type="button" class="btn btn-default btn-lg sign-button">⇔</button>
+        </div>
+        <div class="col-xs-3">
+            <button type="button" class="btn btn-default btn-lg sign-button">¬</button>
+            <button type="button" class="btn btn-default btn-lg sign-button">¬¬</button>
+        </div>
+    </div>
+    <div class="col-xs-12">
+        <input type="text" id="step-submit-input" name="step-submit-input" class="form-control input-lg" value="@ViewBag.text" />
+    </div>
+    <div class="col-xs-12">
+        <button class="btn btn-primary btn-lg col-xs-12" id="step-submit-button" data-bind="click: sendData">Parse</button>
+    </div>
+    <div class="col-xs-12 step-results-container" id="stepList">
+        <ul class="list-group" data-bind="foreach: steps, visible: steps().length>0" style="display: none;">
+            <li class="list-group-item">
+                <span class="item-title" data-bind="text: title"></span>
+                <div class="item-content" data-bind="text: top"></div>
+            </li>
+        </ul>
+    </div>
 </div>
+
+@section Scripts{
+    <script type="text/javascript" src="@Url.Content("js/Home.js")"></script>
+    @*Bindings for knockout*@
+    <script type="text/javascript">
+        ko.applyBindings(new StepListViewModel("@Url.Action("Parse", "Home")"));
+    </script>
+}

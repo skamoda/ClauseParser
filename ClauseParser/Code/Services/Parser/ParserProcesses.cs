@@ -11,6 +11,7 @@ namespace ClauseParser.Code.Services.Parser
         public static Step EliminateEqualsStep(Step step)
         {
             List<Symbol> symbols = step.Top.ReverseBFS();
+            step.Title = "TODO: TITLE";
 
             foreach (Symbol symbol in symbols)
             {
@@ -54,6 +55,7 @@ namespace ClauseParser.Code.Services.Parser
         public static Step EliminateImpliesStep(Step step)
         {
             List<Symbol> symbols = step.Top.ReverseBFS();
+            step.Title = "TODO: TITLE";
 
             foreach (Symbol symbol in symbols)
             {
