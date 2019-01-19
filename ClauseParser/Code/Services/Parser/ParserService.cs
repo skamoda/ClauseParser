@@ -45,7 +45,6 @@ namespace ClauseParser.Code.Services.Parser
         {
             // for dev purposes - hard coded text
             text = new string("∀x(A(x)⇒(∃y(B(x,y)∧C(x,y))))");
-
             List<Symbol> parseText = Collect(text);
 
 
