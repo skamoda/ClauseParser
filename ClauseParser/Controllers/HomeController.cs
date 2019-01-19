@@ -1,4 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using ClauseParser.Code.Services.Parser;
+using ClauseParser.Models;
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using ClauseParser.Code.Services;
+using Newtonsoft.Json;
 
 namespace ClauseParser.Controllers
 {
@@ -11,11 +17,22 @@ namespace ClauseParser.Controllers
         }
 
         [HttpPost]
-        public IActionResult Parse(string text)
+        public JsonResult Parse(string text)
         {
-            ViewBag.text = text;
+            ParserService parserService = new ParserService();
+            List<Step> steps = null;
 
-            return View("Index");
+            try
+            {
+                steps = parserService.Parse(text);
+            }
+            catch (Exception ex)
+            {
+                //return error ie bad syntax
+            }
+
+            var json = JsonConvert.SerializeObject(steps, new SymbolsJsonConverter());
+            return Json(json);
         }
     }
 }
