@@ -40,11 +40,11 @@ namespace ClauseParser.Code
             int code = (int)c;
             switch (code)
             {
-                case Global.AND:
-                case Global.OR:
-                case Global.IMPLIES:
-                case Global.EQUALS:
-                case Global.COMMA:
+                case Consts.AND:
+                case Consts.OR:
+                case Consts.IMPLIES:
+                case Consts.EQUALS:
+                case Consts.COMMA:
                     return true;
                 default:
                     return false;
@@ -56,8 +56,8 @@ namespace ClauseParser.Code
             int code = (int)c;
             switch (code)
             {
-                case Global.FORALL:
-                case Global.EXISTS:
+                case Consts.FORALL:
+                case Consts.EXISTS:
                     return true;
                 default:
                     return false;
@@ -67,7 +67,7 @@ namespace ClauseParser.Code
 
         public static bool IsNegation(this char c)
         {
-            return c == Global.NOT;
+            return c == Consts.NOT;
         }
 
         public static List<T> Reverse<T>(this List<T> list)

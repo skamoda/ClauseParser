@@ -3,6 +3,8 @@ using ClauseParser.Code.Services.Parser;
 using ClauseParser.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using ClauseParser.Code.Services;
+using Newtonsoft.Json;
 
 namespace ClauseParser.Controllers
 {
@@ -15,22 +17,22 @@ namespace ClauseParser.Controllers
         }
 
         [HttpPost]
-        public IActionResult Parse(string text)
+        public JsonResult Parse(string text)
         {
             ParserService parserService = new ParserService();
+            List<Step> steps = null;
 
             try
             {
-                List<Step> steps = parserService.Parse(text);
+                steps = parserService.Parse(text);
             }
             catch (Exception ex)
             {
                 //return error ie bad syntax
             }
 
-            //ViewBag.stepList = steps;
-
-            return View("Index");
+            var a = Newtonsoft.Json.JsonConvert.SerializeObject(steps[0].Top, new SymbolsJsonConverter());  //();
+            return Json(steps);
         }
     }
 }

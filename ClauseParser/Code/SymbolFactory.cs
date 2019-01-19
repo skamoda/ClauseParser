@@ -20,7 +20,7 @@ namespace ClauseParser.Code
 
             if (c.IsOperator())
             {
-                return new Operator(name: Global.NamesDictionary[(int)c]);
+                return new Operator(name: Consts.NamesDictionary[c]);
             }
 
             if (c.IsNegation())
@@ -30,7 +30,7 @@ namespace ClauseParser.Code
 
             if (c.IsQuantifier())
             {
-                return new Quantifier(name: Global.NamesDictionary[(int)c]);
+                return new Quantifier(name: Consts.NamesDictionary[c]);
             }
 
             return null;

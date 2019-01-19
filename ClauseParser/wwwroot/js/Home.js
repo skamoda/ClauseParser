@@ -1,10 +1,11 @@
 ﻿$('#step-submit-button').on('click', function () {
     var data = $('#step-submit-input').val();
     $.ajax({
-            method: "POST",
-            url: "Home/Parse",
-            data: { text: data }
-        })
+        method: "POST",
+        url: "Home/Parse",
+        data: { text: data },
+        dataType: "json"
+    })
         .success(function () {
             alert("Data Saved: ");
         });

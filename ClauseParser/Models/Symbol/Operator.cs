@@ -2,6 +2,7 @@
 using ClauseParser.Models.Exceptions;
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace ClauseParser.Models.Symbol
 {
@@ -35,6 +36,25 @@ namespace ClauseParser.Models.Symbol
             }
             value.IndexInParent = index;
             value.Parent = this;
+        }
+
+        public override string Serialize()
+        {
+            var stringBuilder = new StringBuilder();
+
+            if (ChildrenCount == 2)
+            {
+                stringBuilder.Append($"({Left.Serialize()})");
+                stringBuilder.Append(Name);
+                stringBuilder.Append($"({Right.Serialize()})");
+            }
+            else
+            {
+                throw new AggregateException();
+            }
+
+
+            return stringBuilder.ToString();
         }
     }
 }
