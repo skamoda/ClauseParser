@@ -77,7 +77,7 @@ namespace ClauseParser.Code.Services.Parser
             return steps;
         }
 
-        public List<Symbol> Collect(string text)
+        private List<Symbol> Collect(string text)
         {
             List<Symbol> symbols = new List<Symbol>();
             
@@ -117,7 +117,7 @@ namespace ClauseParser.Code.Services.Parser
             return symbols;
         }
 
-        public List<Symbol> ConvertToPostfix(List<Symbol> list)
+        private List<Symbol> ConvertToPostfix(List<Symbol> list)
         {
             // This will be the final list of symbols
             List<Symbol> result = new List<Symbol>();

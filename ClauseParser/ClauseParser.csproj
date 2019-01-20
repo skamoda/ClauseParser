@@ -21,4 +21,8 @@
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Code\Services\Parser\Processes\" />
+  </ItemGroup>
+
 </Project>
