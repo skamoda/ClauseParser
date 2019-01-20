@@ -1,5 +1,4 @@
-﻿using System;
-using ClauseParser.Models.Exceptions;
+﻿using ClauseParser.Models.Exceptions;
 using System.Collections.Generic;
 using System.Text;
 

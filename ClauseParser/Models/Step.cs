@@ -1,4 +1,5 @@
-﻿using ClauseParser.Models.Symbol;
+﻿using ClauseParser.Code.Services.Parser;
+using ClauseParser.Models.Symbol;
 using System;
 using System.Collections.Generic;
 
@@ -69,5 +70,14 @@ namespace ClauseParser.Models
             } while (actionTaken);
         }
 
+        public List<Symbol.Symbol> GetSymbolsSeparated()
+        {
+            if (Top is Operator && Top.Name == "AND")
+            {
+                return ParserProcesses.AddChild(Top);
+            }
+
+            return new List<Symbol.Symbol> { Top };
+        }
     }
 }
