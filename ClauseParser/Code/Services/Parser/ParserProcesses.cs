@@ -10,7 +10,7 @@ namespace ClauseParser.Code.Services.Parser
         public static Step EliminateEqualsStep(Step step)
         {
             List<Symbol> symbols = step.Top.ReverseBFS();
-            step.Title = "TITLE: Eliminating Equals";
+            step.Title = "Eliminating Equals";
 
             foreach (Symbol symbol in symbols)
             {
@@ -61,7 +61,7 @@ namespace ClauseParser.Code.Services.Parser
         public static Step EliminateImpliesStep(Step step)
         {
             List<Symbol> symbols = step.Top.ReverseBFS();
-            step.Title = "TITLE: Eliminating Implies";
+            step.Title = "Eliminating Implies";
 
             foreach (Symbol symbol in symbols)
             {
@@ -103,7 +103,7 @@ namespace ClauseParser.Code.Services.Parser
         // 3rd step
         public static Step MoveNegationInwardsStep(Step step)
         {
-            step.Title = "TITLE: Moving  Negation Inwards";
+            step.Title = "Moving  Negation Inwards";
             bool endConditional;
             do
             {
@@ -251,7 +251,7 @@ namespace ClauseParser.Code.Services.Parser
         // or Skolem function of the enclosing universally quantified variables.
         public static Step SkolemizeStep(Step step)
         {
-            step.Title = "TITLE: Skolemizing";
+            step.Title = "Skolemizing";
             bool endConditional;
 
             do
@@ -330,7 +330,7 @@ namespace ClauseParser.Code.Services.Parser
         // 5th step
         public static Step DropForAllQuantifierStep(Step step)
         {
-            step.Title = "TITLE: Droping ForAll Quantifiers";
+            step.Title = "Droping ForAll Quantifiers";
             bool endConditional;
             do
             {
@@ -363,7 +363,7 @@ namespace ClauseParser.Code.Services.Parser
         // 6th step
         public static Step DistributeConjuctsStep(Step step)
         {
-            step.Title = "TITLE: Distributing Conjucts";
+            step.Title = "Distributing Conjucts";
             bool endConditional;
 
             do

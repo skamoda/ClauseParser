@@ -27,24 +27,28 @@ namespace ClauseParser.Code.Services.Parser
         {
             List<Step> stepsAfterProcess = new List<Step>();
             Step step = rawStep.CloneStep() as Step;
-
             stepsAfterProcess.Add(rawStep);
+
             foreach (var process in Processes)
             {
-                
+
                 //var newStepClone = step.CloneStep();
                 step.Simplify();
 
                 step = process(step);
-                
-                //add a clone of `step`, not reference (to the list) ???
-                                
-                stepsAfterProcess.Add(step);
+
+                //add a clone of step, not reference (to the list) ???
+                Step aux = step.CloneStep();
+                stepsAfterProcess.Add(aux);
                 //stepsAfterProcess.Add(step);
 
 
             }
 
+            foreach (var step1 in stepsAfterProcess)
+            {
+                Console.WriteLine(step1);
+            }
             return stepsAfterProcess;
         }
 
