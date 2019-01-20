@@ -4,12 +4,25 @@ using System.Collections.Generic;
 
 namespace ClauseParser.Models
 {
+    /// <summary>
+    /// Step base model
+    /// </summary>
     public class Step
     {
+        /// <summary>
+        /// Reference top symbol
+        /// </summary>
         public Symbol.Symbol Top { get; set; }
 
+        /// <summary>
+        /// Step title
+        /// </summary>
         public string Title { get; set; }
 
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="postfixList">Postfix list</param>
         public Step(List<Symbol.Symbol> postfixList)
         {
             Stack<Symbol.Symbol> symbolStack = new Stack<Symbol.Symbol>();
@@ -28,6 +41,9 @@ namespace ClauseParser.Models
             Top = symbolStack.Peek();
         }
 
+        /// <summary>
+        /// This method simplifies symbol list
+        /// </summary>
         public void Simplify()
         {
             bool actionTaken;

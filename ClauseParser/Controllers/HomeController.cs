@@ -8,14 +8,26 @@ using Newtonsoft.Json;
 
 namespace ClauseParser.Controllers
 {
+    /// <summary>
+    /// Main controller
+    /// </summary>
     public class HomeController : Controller
     {
+        /// <summary>
+        /// Main page
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
 
+        /// <summary>
+        /// Action responsible for parsing clause
+        /// </summary>
+        /// <param name="text">Clause text</param>
+        /// <returns></returns>
         [HttpPost]
         public JsonResult Parse(string text)
         {
