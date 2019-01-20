@@ -11,6 +11,11 @@ namespace ClauseParser.Models
 
         public string Title { get; set; }
 
+        public Step()
+        {
+
+        }
+
         public Step(List<Symbol.Symbol> postfixList)
         {
             Stack<Symbol.Symbol> symbolStack = new Stack<Symbol.Symbol>();
@@ -79,5 +84,16 @@ namespace ClauseParser.Models
 
             return new List<Symbol.Symbol> { Top };
         }
+
+        public Step CloneStep()
+        {
+            var clonedStep = (Step) Activator.CreateInstance(GetType());
+            clonedStep.Top = Top;
+            clonedStep.Title = Title;
+
+            return clonedStep;
+        }
+
+        
     }
 }

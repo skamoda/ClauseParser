@@ -80,5 +80,17 @@ namespace ClauseParser.Code
         {
             return listToClone.Select(item => (T)item.Clone()).ToList();
         }
+
+        public static string Replace(this string s)
+        {
+            s = s.Replace("FORALL", "∀");
+            s = s.Replace("EXISTS", "∃");
+            s = s.Replace("AND", "∧");
+            s = s.Replace("OR", "∨");
+            s = s.Replace("IMPLIES", "⇒");
+            s = s.Replace("EQUALS", "⇔");
+            s = s.Replace("NOT", "¬");
+            return s;
+        }
     }
 }

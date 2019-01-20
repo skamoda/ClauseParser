@@ -19,11 +19,11 @@ namespace ClauseParser.Code.Services.Parser
                     var parentSymbol = symbol.Parent;
 
                     var leftChildSymbol = symbol.Children[0];
-                    var rightChildSymbol = symbol.Children[0];
+                    var rightChildSymbol = symbol.Children[1];
 
-                    var newSymbolOperator = new Operator(name: "AND");
-                    var newChildLeft = new Operator(name: "IMPLIES");
-                    var newChildRight = new Operator(name: "IMPLIES");
+                    Symbol newSymbolOperator = new Operator(name: "AND");
+                    Symbol newChildLeft = new Operator(name: "IMPLIES");
+                    Symbol newChildRight = new Operator(name: "IMPLIES");
 
                     // 1st set (copy) children for new left child of AND statement
                     newChildLeft.SetChild(0, leftChildSymbol.Clone());
@@ -71,10 +71,10 @@ namespace ClauseParser.Code.Services.Parser
                     var parentSymbol = symbol.Parent;
 
                     var leftChildSymbol = symbol.Children[0];
-                    var rightChildSymbol = symbol.Children[0];
+                    var rightChildSymbol = symbol.Children[1];
 
-                    var newSymbolOperator = new Operator(name: "OR");
-                    var newChildLeft = new Negation();
+                    Symbol newSymbolOperator = new Operator(name: "OR");
+                    Symbol newChildLeft = new Negation();
 
                     // 1st copy left child of IMPLIES statement
                     newChildLeft.SetChild(0, leftChildSymbol.Clone());
@@ -135,13 +135,13 @@ namespace ClauseParser.Code.Services.Parser
 
                             if (childSymbol.Name == "AND")
                             {
-                                var newOperatorSymbol = new Operator(name: "OR");
+                                Symbol newOperatorSymbol = new Operator(name: "OR");
 
                                 var leftChildSymbol = childSymbol.Children[0];
                                 var rightChildSymbol = childSymbol.Children[1];
 
-                                var newLeftChild = new Negation();
-                                var newRightChild = new Negation();
+                                Symbol newLeftChild = new Negation();
+                                Symbol newRightChild = new Negation();
 
                                 newLeftChild.SetChild(0, leftChildSymbol.Clone());
                                 newRightChild.SetChild(1, rightChildSymbol.Clone());
@@ -161,13 +161,13 @@ namespace ClauseParser.Code.Services.Parser
                             }
                             else if (childSymbol.Name == "OR")
                             {
-                                var newOperatorSymbol = new Operator(name: "AND");
+                                Symbol newOperatorSymbol = new Operator(name: "AND");
 
                                 var leftChildSymbol = childSymbol.Children[0];
                                 var rightChildSymbol = childSymbol.Children[1];
 
-                                var newLeftChild = new Negation();
-                                var newRightChild = new Negation();
+                                Symbol newLeftChild = new Negation();
+                                Symbol newRightChild = new Negation();
 
                                 newLeftChild.SetChild(0, leftChildSymbol.Clone());
                                 newRightChild.SetChild(1, rightChildSymbol.Clone());
@@ -192,12 +192,12 @@ namespace ClauseParser.Code.Services.Parser
                             endConditional = true;
                             if (childSymbol.Name == "FORALL")
                             {
-                                var newOperatorSymbol = new Operator(name: "EXISTS");
+                                Symbol newOperatorSymbol = new Operator(name: "EXISTS");
 
                                 var leftChildSymbol = childSymbol.Children[0];
                                 var rightChildSymbol = childSymbol.Children[1];
 
-                                var newRightChild = new Negation();
+                                Symbol newRightChild = new Negation();
 
                                 newRightChild.SetChild(0, rightChildSymbol.Clone());
 
@@ -216,12 +216,12 @@ namespace ClauseParser.Code.Services.Parser
                             }
                             else if (childSymbol.Name == "EXISTS")
                             {
-                                var newOperatorSymbol = new Operator(name: "FORALL");
+                                Symbol newOperatorSymbol = new Operator(name: "FORALL");
 
                                 var leftChildSymbol = childSymbol.Children[0];
                                 var rightChildSymbol = childSymbol.Children[1];
 
-                                var newRightChild = new Negation();
+                                Symbol newRightChild = new Negation();
 
                                 newRightChild.SetChild(0, rightChildSymbol.Clone());
 
@@ -285,7 +285,7 @@ namespace ClauseParser.Code.Services.Parser
                                 {
                                     if (treeSymbol.Name == symbol.Children[0].Name)
                                     {
-                                        var newFunctionSymbol = new Function(name: "F_" + symbol.Children[0].Name.ToUpper(), argumentCount: parentQuantifierList.Count);
+                                        Symbol newFunctionSymbol = new Function(name: "F_" + symbol.Children[0].Name.ToUpper(), argumentCount: parentQuantifierList.Count);
                                         for (int i = parentQuantifierList.Count - 1; i >= 0; --i)
                                         {
                                             newFunctionSymbol.SetChild(i, new Variable(name: parentQuantifierList[i].Children[0].Name));
@@ -304,7 +304,7 @@ namespace ClauseParser.Code.Services.Parser
                             {
                                 if (treeSymbol is Variable && treeSymbol.Name == symbol.Children[0].Name)
                                 {
-                                    var newConstant = new Constant(name: variableName);
+                                    Symbol newConstant = new Constant(name: variableName);
                                     treeSymbol.Parent.SetChild(treeSymbol.IndexInParent, newConstant);
                                 }
                             }
