@@ -7,9 +7,6 @@ namespace ClauseParser.Models.Symbol
 {
     public class Variable : Symbol
     {
-
-        public Variable() : base() { }
-
         public Variable(Symbol parent = null, string name = "")
         {
             Parent = parent;
@@ -32,6 +29,6 @@ namespace ClauseParser.Models.Symbol
 
             return stringBuilder.ToString();
         }
-        public override List<Symbol> GetChildren() => new List<Symbol>();
+        protected override List<Symbol> GetChildren() => new List<Symbol>();
     }
 }

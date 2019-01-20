@@ -36,7 +36,7 @@ namespace ClauseParser.Models
 
             // Only thing left on the stack should be the root node of the tree
             if (symbolStack.Count != 1)
-                throw new Exception("Undexpected stack size: " + symbolStack.Count);
+                throw new Exception("Unexpected stack size: " + symbolStack.Count);
 
             Top = symbolStack.Peek();
         }
@@ -55,8 +55,8 @@ namespace ClauseParser.Models
                 {
                     if (symbol is Operator)
                     {
-                        Symbol.Symbol left = symbol.GetChildren()[0];
-                        Symbol.Symbol right = symbol.GetChildren()[1];
+                        Symbol.Symbol left = symbol.Children[0];
+                        Symbol.Symbol right = symbol.Children[1];
 
                         if (left is Variable && right is Variable)
                         {

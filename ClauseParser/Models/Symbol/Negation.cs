@@ -10,7 +10,7 @@ namespace ClauseParser.Models.Symbol
     {
 
         public Symbol Child;
-        public Negation() : base()
+        public Negation()
         {
             Priority = (int) Consts.Priorities.NOT;
             Name = "NOT";
@@ -52,6 +52,6 @@ namespace ClauseParser.Models.Symbol
             return stringBuilder.ToString();
         }
 
-        public override List<Symbol> GetChildren() => new List<Symbol> { Child };
+        protected override List<Symbol> GetChildren() => new List<Symbol> { Child };
     }
 }

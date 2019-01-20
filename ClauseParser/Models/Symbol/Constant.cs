@@ -1,5 +1,4 @@
-﻿using System;
-using ClauseParser.Models.Exceptions;
+﻿using ClauseParser.Models.Exceptions;
 using System.Collections.Generic;
 using System.Text;
 
@@ -7,7 +6,6 @@ namespace ClauseParser.Models.Symbol
 {
     public class Constant : Symbol
     {
-        public Constant() : base() { }
         public Constant(Symbol parent = null, string name = "")
         {
             Parent = parent;
@@ -24,6 +22,6 @@ namespace ClauseParser.Models.Symbol
 
             return stringBuilder.ToString();
         }
-        public override List<Symbol> GetChildren() => new List<Models.Symbol.Symbol>();
+        protected override List<Symbol> GetChildren() => new List<Symbol>();
     }
 }

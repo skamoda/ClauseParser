@@ -4,6 +4,7 @@ using ClauseParser.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using ClauseParser.Code.Services;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
 namespace ClauseParser.Controllers
@@ -13,6 +14,18 @@ namespace ClauseParser.Controllers
     /// </summary>
     public class HomeController : Controller
     {
+        private readonly IParserService _parserService;
+        private readonly ILogger _logger;
+
+        public HomeController(
+            IParserService parserService,
+            ILogger<HomeController> logger
+        )
+        {
+            _parserService = parserService;
+            _logger = logger;
+        }
+        
         /// <summary>
         /// Main page
         /// </summary>
@@ -31,15 +44,15 @@ namespace ClauseParser.Controllers
         [HttpPost]
         public JsonResult Parse(string text)
         {
-            ParserService parserService = new ParserService();
             List<Step> steps = null;
 
             try
             {
-                steps = parserService.Parse(text);
+                steps = _parserService.Parse(text);
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex.ToString());
                 //return error ie bad syntax
             }
 

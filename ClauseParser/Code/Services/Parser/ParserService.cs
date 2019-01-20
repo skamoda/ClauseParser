@@ -4,11 +4,20 @@ using ClauseParser.Models.Symbol;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Extensions.Logging;
 
 namespace ClauseParser.Code.Services.Parser
 {
-    public class ParserService
+    public class ParserService : IParserService
     {
+        private readonly ILogger _logger;
+        public ParserService(
+            ILogger<ParserService> logger
+        )
+        {
+            _logger = logger;
+        }
+        
         //List of processes to process each step and return a new one
         private List<Func<Step,Step>> Processes { get; } = new List<Func<Step,Step>>();
 

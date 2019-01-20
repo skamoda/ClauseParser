@@ -9,7 +9,7 @@ namespace ClauseParser.Models.Symbol
     {
         public Variable Variable;
         public Symbol Expression;
-        //public Quantifier() : base() { }
+
         public Quantifier(Symbol parent = null, string name = "")
         {
             Parent = parent;
@@ -53,6 +53,6 @@ namespace ClauseParser.Models.Symbol
             return stringBuilder.ToString();
         }
 
-        public override List<Symbol> GetChildren() => new List<Symbol>() { Variable, Expression };
+        protected override List<Symbol> GetChildren() => new List<Symbol>() { Variable, Expression };
     }
 }

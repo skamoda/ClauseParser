@@ -40,7 +40,7 @@ namespace ClauseParser.Models.Symbol
         /// Internal method for getting list of children
         /// </summary>
         /// <returns></returns>
-        public abstract List<Symbol> GetChildren();
+        protected abstract List<Symbol> GetChildren();
 
         /// <summary>
         /// Method for getting list of children

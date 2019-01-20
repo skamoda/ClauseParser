@@ -9,14 +9,14 @@ namespace ClauseParser.Models.Symbol
 {
     public class Function : Symbol
     {
-        private readonly Symbol[] Arguments;
-        public Function() : base() { }
+        private readonly Symbol[] _arguments;
+
         public Function(Symbol parent = null, String name = "", int argumentCount = 0)
         {
             Parent = parent;
             Name = name;
             Priority = (int) Consts.Priorities.FUNCTION;
-            Arguments = new Symbol[argumentCount];
+            _arguments = new Symbol[argumentCount];
         }
         
         public override Symbol FillChildren(ref Stack<Symbol> stack)
@@ -68,7 +68,7 @@ namespace ClauseParser.Models.Symbol
         {
             try
             {
-                Arguments[index] = symbol;
+                _arguments[index] = symbol;
             }
             catch (Exception)
             {
@@ -86,10 +86,10 @@ namespace ClauseParser.Models.Symbol
             stringBuilder.Append(Name);
             stringBuilder.Append("(");
 
-            foreach (var argument in Arguments)
+            foreach (var argument in _arguments)
             {
                 stringBuilder.Append($"{argument.Serialize()}");
-                if (Arguments.LastOrDefault() != argument)
+                if (_arguments.LastOrDefault() != argument)
                 {
                     stringBuilder.Append(", ");
                 }
@@ -102,6 +102,6 @@ namespace ClauseParser.Models.Symbol
             return stringBuilder.ToString();
         }
 
-        public override List<Symbol> GetChildren() => new List<Symbol>(Arguments);
+        protected override List<Symbol> GetChildren() => new List<Symbol>(_arguments);
     }
 }

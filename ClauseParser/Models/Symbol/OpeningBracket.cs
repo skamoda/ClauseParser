@@ -11,6 +11,6 @@ namespace ClauseParser.Models.Symbol
             Priority = (int) Consts.Priorities.BRACKET;
         }
         public override void SetChild(int index, Symbol symbol) => throw new InvalidChildIndexException("Index: " + index);
-        public override List<Symbol> GetChildren() => new List<Symbol>();
+        protected override List<Symbol> GetChildren() => new List<Symbol>();
     }
 }

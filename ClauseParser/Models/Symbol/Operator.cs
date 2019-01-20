@@ -11,7 +11,7 @@ namespace ClauseParser.Models.Symbol
 
         public Symbol Left { get; set; }
         public Symbol Right { get; set; }
-        //public Operator() : base() { }
+
         public Operator(Symbol parent = null, String name = "")
         {
             Parent = parent;
@@ -19,7 +19,7 @@ namespace ClauseParser.Models.Symbol
             Priority = (int)Enum.Parse(typeof(Consts.Priorities), this.Name);
         }
 
-        public override List<Symbol> GetChildren() => new List<Symbol> { Left, Right };
+        protected override List<Symbol> GetChildren() => new List<Symbol> { Left, Right };
 
         public override void SetChild(int index, Symbol value)
         {
