@@ -387,7 +387,7 @@ namespace ClauseParser.Code.Services.Parser
                             leftSymbolList.Add(symbol.Children[0]);
                         }
 
-                        if (symbol.Children[1] is Operator && symbol.Children[1].Name == "OR")
+                        if (symbol.Children[1] is Operator && symbol.Children[1].Name == "AND")
                         {
                             rightSymbolList.AddRange(AddChild(symbol.Children[1]));
                         }
