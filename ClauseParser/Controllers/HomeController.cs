@@ -1,10 +1,10 @@
-﻿using System;
+﻿using ClauseParser.Code.Services;
 using ClauseParser.Code.Services.Parser;
 using ClauseParser.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using ClauseParser.Code.Services;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 
 namespace ClauseParser.Controllers
 {
@@ -30,7 +30,7 @@ namespace ClauseParser.Controllers
             {
                 //return error ie bad syntax
             }
-
+            
             var json = JsonConvert.SerializeObject(steps, new SymbolsJsonConverter());
             return Json(json);
         }

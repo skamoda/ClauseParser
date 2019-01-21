@@ -88,12 +88,19 @@ namespace ClauseParser.Models
         public Step CloneStep()
         {
             var clonedStep = (Step) Activator.CreateInstance(GetType());
+
+            //foreach (Symbol.Symbol symbol in Top)
+            //{
+            //    clonedStep.Top = symbol.Clone();
+            //}
+
             clonedStep.Top = Top.Clone();
-            clonedStep.Title = Title;
+            clonedStep.Title = this.Title;
+
             return clonedStep;
 
         }
 
-        
+       
     }
 }

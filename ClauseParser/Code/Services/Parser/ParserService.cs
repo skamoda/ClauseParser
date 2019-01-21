@@ -1,9 +1,11 @@
 ﻿using ClauseParser.Models;
 using ClauseParser.Models.Exceptions;
 using ClauseParser.Models.Symbol;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Symbol = ClauseParser.Models.Symbol.Symbol;
 
 namespace ClauseParser.Code.Services.Parser
 {
@@ -22,27 +24,30 @@ namespace ClauseParser.Code.Services.Parser
             Processes.Add(ParserProcesses.DropForAllQuantifierStep);
             Processes.Add(ParserProcesses.DistributeConjuctsStep);  
         }
-
+        
         private List<Step> Process(Step rawStep)
         {
             List<Step> stepsAfterProcess = new List<Step>();
-            Step step = rawStep.CloneStep() as Step;
+
+            // tutaj exception wywala z home controllera
+            Step step = ParseAndClone(rawStep);
             stepsAfterProcess.Add(rawStep);
 
             foreach (var process in Processes)
             {
-
+                var aux = ParseAndClone(step);
                 //var newStepClone = step.CloneStep();
-                step.Simplify();
+                aux.Simplify();
+                // funkcja klonowania Clone
+                // clone serializacja i deserializacji - nowa metoda
+                // serializacja do jsona
 
-                step = process(step);
+                aux = process(aux);
 
-                //add a clone of step, not reference (to the list) ???
-                Step aux = step.CloneStep();
+                // add a clone of step, not reference (to the list)
                 stepsAfterProcess.Add(aux);
-                //stepsAfterProcess.Add(step);
-
-
+                // stepsAfterProcess.Add(step);
+                step = aux;
             }
 
             foreach (var step1 in stepsAfterProcess)
@@ -54,16 +59,16 @@ namespace ClauseParser.Code.Services.Parser
 
         public List<Step> Parse(string text)
         {
-            // for dev purposes - hard coded text
-            //text = new string("∀x(A(x)⇒(∃y(B(x,y)∧C(x,y))))");
-
+            // for dev purposes - hard coded text 
+            // text = new string("∀x(A(x)⇒(∃y(B(x,y)∧C(x,y))))"); <- first test
+            
             List<Symbol> parseText = Collect(text);
-
 
             List<Symbol> postfixSymbols = ConvertToPostfix(parseText);
 
             // Create a raw hierarchy
             Step rawStep = new Step(postfixSymbols);
+            // dotad wywalic - parsowanie <- zostawilem zeby skupic sie na klonowaniu stepow
 
             // List of steps
             var steps = Process(rawStep);
@@ -162,5 +167,28 @@ namespace ClauseParser.Code.Services.Parser
 
             return result;
         }
+
+
+        // function for serialization and deserialization
+        public Step ParseAndClone(Step step)
+        {
+            var json = JsonConvert.SerializeObject(step, new SymbolsJsonConverter());
+
+            // to jest raczej niepotrzebne
+            //var data = (string)JsonConvert.DeserializeObject(json);
+            // tutaj trzeba wyciagac wartosci z jsona czy nie?
+
+            List<Symbol> parseText = Collect(json);
+
+            List<Symbol> postfixSymbols = ConvertToPostfix(parseText);
+
+            // Create a raw hierarchy
+            Step rawStep = new Step(postfixSymbols);
+
+            
+            return rawStep;
+        }
+        
+       
     }
 }
