@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json.Linq;
 using Symbol = ClauseParser.Models.Symbol.Symbol;
 
 namespace ClauseParser.Code.Services.Parser
@@ -50,10 +51,6 @@ namespace ClauseParser.Code.Services.Parser
                 step = aux;
             }
 
-            foreach (var step1 in stepsAfterProcess)
-            {
-                Console.WriteLine(step1);
-            }
             return stepsAfterProcess;
         }
 
@@ -173,12 +170,12 @@ namespace ClauseParser.Code.Services.Parser
         public Step ParseAndClone(Step step)
         {
             var json = JsonConvert.SerializeObject(step, new SymbolsJsonConverter());
-
+            var o = JObject.Parse(json);
             // to jest raczej niepotrzebne
             //var data = (string)JsonConvert.DeserializeObject(json);
             // tutaj trzeba wyciagac wartosci z jsona czy nie?
 
-            List<Symbol> parseText = Collect(json);
+            List<Symbol> parseText = Collect(o["Top"].ToString());
 
             List<Symbol> postfixSymbols = ConvertToPostfix(parseText);
 

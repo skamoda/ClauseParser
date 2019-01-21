@@ -285,7 +285,7 @@ namespace ClauseParser.Code.Services.Parser
                                 {
                                     if (treeSymbol.Name == symbol.Children[0].Name)
                                     {
-                                        Symbol newFunctionSymbol = new Function(name: "F_" + symbol.Children[0].Name.ToUpper(), argumentCount: parentQuantifierList.Count);
+                                        Symbol newFunctionSymbol = new Function(name: "F" + symbol.Children[0].Name.ToUpper(), argumentCount: parentQuantifierList.Count);
                                         for (int i = parentQuantifierList.Count - 1; i >= 0; --i)
                                         {
                                             newFunctionSymbol.SetChild(i, new Variable(name: parentQuantifierList[i].Children[0].Name));
