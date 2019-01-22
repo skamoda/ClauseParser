@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using ClauseParser.Models.Symbol;
 
 namespace ClauseParser.Controllers
 {
@@ -28,11 +29,25 @@ namespace ClauseParser.Controllers
             }
             catch (Exception ex)
             {
-                //return error ie bad syntax
+                steps = GetExceptionResult(ex);
             }
             
             var json = JsonConvert.SerializeObject(steps, new SymbolsJsonConverter());
             return Json(json);
+        }
+
+        private static List<Step> GetExceptionResult(Exception ex)
+        {
+            var constant = new Constant(null, "Incorrect data provided");
+
+            return new List<Step>
+            {
+                new Step(new List<Symbol> {constant})
+                {
+                    Top = constant,
+                    Title = constant.Name
+                }
+            };
         }
     }
 }
