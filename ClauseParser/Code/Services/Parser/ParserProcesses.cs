@@ -342,15 +342,15 @@ namespace ClauseParser.Code.Services.Parser
                     {
                         endConditional = true;
                         var oldSymbol = symbol.Parent;
-                        var statement = symbol.Children[1];
+                        var rightStatement = symbol.Children[1];
                         if (oldSymbol == null)
                         {
-                            step.Top = statement;
-                            statement.Parent = null;
+                            step.Top = rightStatement;
+                            rightStatement.Parent = null;
                         }
                         else
                         {
-                            oldSymbol.SetChild(symbol.IndexInParent, statement);
+                            oldSymbol.SetChild(symbol.IndexInParent, rightStatement);
                         }
                     }
                 }
@@ -471,6 +471,7 @@ namespace ClauseParser.Code.Services.Parser
             return symbolList;
         }
 
+        // Not used?
         public static List<Symbol> GetSymbolsSeparated(Step step)
         {
             if (step.Top is Operator && step.Top.Name == "AND")
@@ -480,6 +481,7 @@ namespace ClauseParser.Code.Services.Parser
 
             return new List<Symbol> { step.Top };
         }
+        
     }
 }
 

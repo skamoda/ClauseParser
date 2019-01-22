@@ -2,10 +2,10 @@
 using ClauseParser.Models.Exceptions;
 using ClauseParser.Models.Symbol;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json.Linq;
 using Symbol = ClauseParser.Models.Symbol.Symbol;
 
 namespace ClauseParser.Code.Services.Parser
@@ -30,27 +30,25 @@ namespace ClauseParser.Code.Services.Parser
         {
             List<Step> stepsAfterProcess = new List<Step>();
 
-            // tutaj exception wywala z home controllera
+            
             Step step = ParseAndClone(rawStep);
             stepsAfterProcess.Add(rawStep);
 
             foreach (var process in Processes)
             {
                 var aux = ParseAndClone(step);
-                //var newStepClone = step.CloneStep();
+                
                 aux.Simplify();
-                // funkcja klonowania Clone
-                // clone serializacja i deserializacji - nowa metoda
-                // serializacja do jsona
-
+                
                 aux = process(aux);
 
-                // add a clone of step, not reference (to the list)
+                // add a clone of step to the list
                 stepsAfterProcess.Add(aux);
-                // stepsAfterProcess.Add(step);
+                
                 step = aux;
             }
 
+            
             return stepsAfterProcess;
         }
 
@@ -65,8 +63,7 @@ namespace ClauseParser.Code.Services.Parser
 
             // Create a raw hierarchy
             Step rawStep = new Step(postfixSymbols);
-            // dotad wywalic - parsowanie <- zostawilem zeby skupic sie na klonowaniu stepow
-
+            
             // List of steps
             var steps = Process(rawStep);
          
@@ -171,9 +168,7 @@ namespace ClauseParser.Code.Services.Parser
         {
             var json = JsonConvert.SerializeObject(step, new SymbolsJsonConverter());
             var o = JObject.Parse(json);
-            // to jest raczej niepotrzebne
-            //var data = (string)JsonConvert.DeserializeObject(json);
-            // tutaj trzeba wyciagac wartosci z jsona czy nie?
+            
 
             List<Symbol> parseText = Collect(o["Top"].ToString());
 
