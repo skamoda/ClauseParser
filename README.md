@@ -1,3 +1,8 @@
+PW.W.1 Parser klauzul
+Napisać program, który przyjmuje zbiór formuł rachunku predykatów pierwszego rzędu i
+przekształca je do postaci zbioru klauzul. Wewnętrzna reprezentacja tych klauzul powinna
+umożliwiać ich wygodne stosowanie.
+
 # ClauseParser
 First Order Logic: Conversion to CNF
 
